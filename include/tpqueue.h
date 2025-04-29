@@ -30,7 +30,7 @@ public:
         if (empty() || value.prior > head_->data.prior) {
             node->next = head_;
             head_ = node;
-        }else {
+        } else {
             Node* cur = head_;
             while (cur->next && cur->next->data.prior >= value.prior) {
                 cur = cur->next;
