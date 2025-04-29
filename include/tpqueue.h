@@ -1,9 +1,14 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
-
 #pragma once
 #include <stdexcept>
+
+struct SYM {
+    char ch;
+    int prior;
+};
+
 template<typename T>
 class TPQueue {
 private:
@@ -18,11 +23,13 @@ public:
     TPQueue() = default;
     ~TPQueue() { clear(); }
 
-    bool IsEmpty() const { return head_ == nullptr; }
+    bool empty() const {
+        return head_ == nullptr;
+    }
 
-    void Push(const T& value) {
+    void push(const T& value) {
         Node* node = new Node(value);
-        if (IsEmpty() || value.prior > head_->data.prior) {
+        if (empty() || value.prior > head_->data.prior) {
             node->next = head_;
             head_ = node;
         }
@@ -36,8 +43,8 @@ public:
         }
     }
 
-    T Pop() {
-        if (IsEmpty()) throw std::underflow_error("TPQueue::Pop(): empty");
+    T pop() {
+        if (empty()) throw std::underflow_error("TPQueue::pop(): empty");
         Node* tmp = head_;
         T      rv = tmp->data;
         head_ = head_->next;
@@ -45,8 +52,8 @@ public:
         return rv;
     }
 
-    const T& Top() const {
-        if (IsEmpty()) throw std::underflow_error("TPQueue::Top(): empty");
+    const T& top() const {
+        if (empty()) throw std::underflow_error("TPQueue::top(): empty");
         return head_->data;
     }
 
@@ -58,4 +65,3 @@ public:
         }
     }
 };
-#endif  // INCLUDE_TPQUEUE_H_
