@@ -15,7 +15,7 @@ private:
     struct Node {
         T data;
         Node* next;
-        Node(const T& d) : data(d), next(nullptr) {}
+        explicit Node(const T& d) : data(d), next(nullptr) {}
     };
     Node* head_{ nullptr };
 
@@ -30,7 +30,8 @@ public:
         if (empty() || value.prior > head_->data.prior) {
             node->next = head_;
             head_ = node;
-        } else {
+        }
+        else {
             Node* cur = head_;
             while (cur->next && cur->next->data.prior >= value.prior) {
                 cur = cur->next;
@@ -63,4 +64,5 @@ public:
     }
 };
 
-#endif // INCLUDE_TPQUEUE_H_
+#endif  // INCLUDE_TPQUEUE_H_
+
