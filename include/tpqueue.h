@@ -1,7 +1,7 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
-#pragma once
+
 #include <stdexcept>
 
 struct SYM {
@@ -23,9 +23,7 @@ public:
     TPQueue() = default;
     ~TPQueue() { clear(); }
 
-    bool empty() const {
-        return head_ == nullptr;
-    }
+    bool empty() const { return head_ == nullptr; }
 
     void push(const T& value) {
         Node* node = new Node(value);
@@ -65,3 +63,5 @@ public:
         }
     }
 };
+
+#endif 
